@@ -1,5 +1,5 @@
 # button that creates a ripple effect when clicked
-class RippleButton extends Layer
+class exports.RippleButton extends Layer
 	constructor: (@options={}) ->
 		_.defaults @options,
 			backgroundColor: "cornflowerblue"
