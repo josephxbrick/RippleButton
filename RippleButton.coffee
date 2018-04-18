@@ -160,9 +160,3 @@ class exports.RippleButton extends Layer
 	@define "shadowColor",
 		get: -> return @_textLayer.shadowColor
 		set: (value) -> @_textLayer.shadowColor = value
-
-rippleButton = new RippleButton
-	width: 100
-	height: 40
-	fontSize: 18
-	point: Align.center
