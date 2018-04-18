@@ -135,7 +135,7 @@ class exports.RippleButton extends Layer
 		set: (value) -> @_textLayer.textTransform = value; @_textLayer?.point = Align.center
 	@define "textDecoration",
 		get: -> return @_textLayer.textDecoration
-		set: (value) -> @_textLayer.textDecoration = value; @_textLayer?.point = Align.center
+		set: (value) -> @_textLayer.textDecoration = value
 	@define "textIndent",
 		get: -> return @_textLayer.textIndent
 		set: (value) -> @_textLayer.textIndent = value; @_textLayer?.point = Align.center
@@ -144,22 +144,22 @@ class exports.RippleButton extends Layer
 		set: (value) -> @_textLayer.truncate = value; @_textLayer?.point = Align.center
 	@define "direction",
 		get: -> return @_textLayer.direction
-		set: (value) -> @_textLayer.direction = value; @_textLayer?.point = Align.center	
+		set: (value) -> @_textLayer.direction = value	
 	@define "whiteSpace",
 		get: -> return @_textLayer.whiteSpace
 		set: (value) -> @_textLayer.whiteSpace = value; @_textLayer?.point = Align.center
 	@define "shadowX",
 		get: -> return @_textLayer.shadowX
-		set: (value) -> @_textLayer.shadowX = value; @_textLayer?.point = Align.center
+		set: (value) -> @_textLayer.shadowX = value
 	@define "shadowY",
 		get: -> return @_textLayer.shadowY
-		set: (value) -> @_textLayer.shadowY = value; @_textLayer?.point = Align.center
+		set: (value) -> @_textLayer.shadowY
 	@define "shadowBlur",
 		get: -> return @_textLayer.shadowBlur
-		set: (value) -> @_textLayer.shadowBlur = value; @_textLayer?.point = Align.center
+		set: (value) -> @_textLayer.shadowBlur = value
 	@define "shadowColor",
 		get: -> return @_textLayer.shadowColor
-		set: (value) -> @_textLayer.shadowColor = value; @_textLayer?.point = Align.center
+		set: (value) -> @_textLayer.shadowColor = value
 
 rippleButton = new RippleButton
 	width: 100
