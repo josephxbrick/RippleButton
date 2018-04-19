@@ -1,5 +1,8 @@
 # RippleButton
+
 A Framer module that creates a button that exhibits the Material Design ripple effect when clicked.
+
+Try out [this sample](https://framer.cloud/DHZTZ) to see an example button (which looks better than the gif below).
 
 <img src="/readme_images/rippleButtonLarge.gif" width="100">
 
