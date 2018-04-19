@@ -37,3 +37,15 @@ rippleButton = new RippleButton
   letterSpacing: 2
   color: "white"
 ```
+## Defaults
+Here are the defaults specified for a new RippleButton instance. (Other defaults are inherited from Layer defaults.)
+```
+backgroundColor: "cornflowerblue"
+rippleColor: (the background color darkened by 10%)
+rippleOptions: time: 0.2, curve: Bezier.easeOut
+triggerOnClick: true
+color: "white"
+font: Utils.loadWebFont "Roboto"
+fontSize: 24
+text: "Button"
+```
