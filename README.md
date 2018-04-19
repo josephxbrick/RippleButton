@@ -7,7 +7,7 @@ Try out [this sample](https://framer.cloud/DHZTZ) to see an example button (whic
 <img src="/readme_images/rippleButtonLarge.gif" width="100">
 
 ## Getting Started
-If you have Modules installed, or want to use Modules to add this module to you project, click the badge below.
+If you have Modules installed, or want to install Modules to add this module to you project, click the badge below.
 
 <a href='https://open.framermodules.com/RippleButton'>
     <img alt='Install with Framer Modules'
