@@ -4,4 +4,4 @@ rippleButton = new RippleButton
   backgroundColor: "dodgerblue"
   width: 200
   height: 70
-  point: Align.centerFrame
+  point: Align.center
