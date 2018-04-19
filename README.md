@@ -9,7 +9,11 @@ Try out [this sample](https://framer.cloud/DHZTZ) to see an example button (whic
 ## Getting Started
 If you have Modules installed, or want to use Modules to add this module to you project, click the badge below.
 
-< link forthcoming >
+<a href='https://open.framermodules.com/RippleButton'>
+    <img alt='Install with Framer Modules'
+    src='https://www.framermodules.com/assets/badge@2x.png' width='160' height='40' />
+</a>
+
 
 Note that you can hit Ctrl+C in Modules (when RippleButton is the active module) to copy a code example that you can then paste into your file. 
 
