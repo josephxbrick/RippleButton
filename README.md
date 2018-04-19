@@ -44,7 +44,7 @@ rippleButton = new RippleButton
   letterSpacing: 2
   color: "white"
 ```
-If you want to set the shadow of the button's text label, use the following properties instead, as `shadowX`, `shadowY`, `shadowBlur`, and `shadowColor` define the shadow for the button itself, not for the button's label.
+If you want to set the shadow of the button's text label, use the following properties instead of the ones specified for TextLayer instances, as `shadowX`, `shadowY`, `shadowBlur`, and `shadowColor` define the shadow for the button itself, not for the button's label.
 
 * **textShadowX**: same as shadowX for a TextLayer instance
 * **textShadowY**: same as shadowY for a TextLayer instance
