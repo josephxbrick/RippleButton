@@ -31,7 +31,7 @@ rippleButton = new RippleButton
   text: "Options" # label of button
 ```
 ## Properties
-* **rippleColor**: the color of the circle that animates to create the animation (default: rippleButton.backgroundColor.darken 10)
+* **rippleColor**: the color of the circle that animates to create the animation (default: `rippleButton.backgroundColor.darken 10`)
 * **rippleOptions**: the animationOptions for the ripple animation (default: `time: 0.25, curve: Bezier.easeOut`)
 * **triggerOnClick**: (boolean) whether the animation is triggered by clicking the button (default: `true`). 
 
