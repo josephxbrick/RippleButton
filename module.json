@@ -1,0 +1,9 @@
+{
+	"name": "RippleButton",
+	"description": "Creates a button with Material Design ripple effect",
+	"author": "Joseph Brick",
+	"example": "example.coffee",
+	"require": "{RippleButton} = require 'RippleButton'",
+	"thumb": "readme_images/rippleButton.gif",
+	"install": "RippleButton.coffee"
+}
