@@ -35,7 +35,7 @@ rippleButton = new RippleButton
 * **rippleOptions**: the animationOptions for the ripple animation (default: `time: 0.25, curve: Bezier.easeOut`)
 * **triggerOnClick**: (boolean) whether the animation is triggered by clicking the button (default: `true`). 
 
-Note that you also can use any TextLayer property to set text properties of the button label: 
+Note that you also can use any TextLayer property (except for the text shadow properties) to set text properties of the button label: 
 ```
 rippleButton = new RippleButton
   text: "Options"
@@ -44,6 +44,13 @@ rippleButton = new RippleButton
   letterSpacing: 2
   color: "white"
 ```
+If you want to set the shadow of the button's text label, use the following properties instead, as `shadowX`, `shadowY`, `shadowBlur`, and `shadowColor` define the shadow for the button itself, not for the button's label.
+
+* **textShadowX**: same as shadowX for a TextLayer instance
+* **textShadowY**: same as shadowY for a TextLayer instance
+* **textShadowBlur**: same as shadowBlur for a TextLayer instance
+* **textShadowColor**: same as shadowColor for a TextLayer instance
+
 ## Defaults
 Here are the defaults specified for a new RippleButton instance. (Other defaults are inherited from Layer defaults.)
 ```
