@@ -2,17 +2,18 @@
 class exports.RippleButton extends Layer
 	constructor: (@options={}) ->
 		# TextLayer that holds the button label
-		@_textLayer = new TextLayer
+		@_buttonLabel = new TextLayer
 		# layer that contains and clips the animation
 		@_clipper = new Layer
 			clip: true
 			backgroundColor: ""
 		# circle that animates to create ripple effect
-		@_ripple = new Layer
+		@_rippleCircle = new Layer
 			name: "ripple"
 			borderRadius: "50%"
 			parent: @_clipper
 			size: 0
+		# class default properties
 		_.defaults @options,
 			backgroundColor: "cornflowerblue"
 			rippleColor: "notSetByUser"
@@ -23,26 +24,27 @@ class exports.RippleButton extends Layer
 			fontSize: 24
 			text: "Button"
 		super @options
-
-		# Can't set default for rippleColor above because @backgroundColor is not yet available,
-		# so we set it here.
+		# Can't set rippleColor's default before the super (above) because @backgroundColor
+		# is not yet available. So set it now if the coder hasn't provided their own.
 		if @options.rippleColor is "notSetByUser"
-			@_ripple.backgroundColor = @backgroundColor.darken 10
-
+			@_rippleCircle.backgroundColor = @backgroundColor.darken 10
 		@_clipper.parent = @
-		@_textLayer.parent = @
+		@_buttonLabel.parent = @
 		@_clipper.size = @size
-		@_textLayer.point = Align.center
-
+		@_buttonLabel.point = Align.center
+		
+# EVENTS ==============================
+	
 		@on "change:size", ->
 			@_clipper.size = @size
-			@_textLayer.point = Align.center
-
+			@_buttonLabel.point = Align.center
 		@_clipper.onClick (event, target) =>
 			if @triggerOnClick is true
 				@sendRipple event,target
-
-	# Triggers ripple animation. Parameters event and target come from click event.
+				
+# FUNCTIONS ==============================
+	
+	# Triggers ripple animation. Parameters event and target come from click/tap event.
 	sendRipple: (event, target) ->
 		clickPoint = target.convertPointToLayer(event.point, target)
 		r = @selectChild("ripple")
@@ -59,10 +61,8 @@ class exports.RippleButton extends Layer
 		fadeAnimation = new Animation r,
 			opacity: 0
 			options:
-				time:
-					rippleAnimation.options.time * 2.5 # "magic" ratio that feels right
-				curve:
-					rippleAnimation.options.curve
+				time: rippleAnimation.options.time * 2.5  # @_rippleCircle's fade takes 2.5 times longer than its resize
+				curve: rippleAnimation.options.curve
 		rippleAnimation.restart()
 		fadeAnimation.restart()
 
@@ -73,90 +73,94 @@ class exports.RippleButton extends Layer
 		pointToLowerRight = Math.sqrt( Math.pow(layer.width - point.x, 2) + Math.pow(layer.height - point.y, 2))
 		return Math.max pointToUpperLeft, pointToUpperRight, pointToLowerLeft, pointToLowerRight
 
-	# handle setting/getting custom properties
+# GETTER/SETTERS ==============================
+	
+	# custom properties
 	@define "rippleOptions",
-		get: -> @_ripple.animationOptions
-		set: (value) -> @_ripple.animationOptions = value
+		get: -> @_rippleCircle.animationOptions
+		set: (value) -> @_rippleCircle.animationOptions = value
 	@define "rippleColor",
-		get: -> @_ripple.backgroundColor
-		set: (value) -> if value isnt "notSetByUser" then @_ripple.backgroundColor = value
+		get: -> @_rippleCircle.backgroundColor
+		set: (value) -> if value isnt "notSetByUser" then @_rippleCircle.backgroundColor = value
 	@define "triggerOnClick",
 		get: -> @options.triggerOnClick
 		set: (value) -> @options.triggerOnClick = value
 
-	# handle getting/setting text properties, so it feels like using TextLayer
+	# getters/setters for all TextLayer properties of @_buttonLabel
 	@define "text",
-		get: -> return @_textLayer.text
-		set: (value) -> @_textLayer.text = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.text
+		set: (value) -> @_buttonLabel.text = value; @_buttonLabel.point = Align.center
 	@define "color",
-		get: -> return @_textLayer.color
-		set: (value) -> @_textLayer.color = value
+		get: -> @_buttonLabel.color
+		set: (value) -> @_buttonLabel.color = value
 	@define "fontSize",
-		get: -> return @_textLayer.fontSize
-		set: (value) -> @_textLayer.fontSize = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.fontSize
+		set: (value) -> @_buttonLabel.fontSize = value; @_buttonLabel.point = Align.center
 	@define "fontWeight",
-		get: -> return @_textLayer.fontWeight
-		set: (value) -> @_textLayer.fontWeight = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.fontWeight
+		set: (value) -> @_buttonLabel.fontWeight = value; @_buttonLabel.point = Align.center
 	@define "fontFamily",
-		get: -> return @_textLayer.fontWeight
-		set: (value) -> @_textLayer.fontWeight = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.fontWeight
+		set: (value) -> @_buttonLabel.fontWeight = value; @_buttonLabel.point = Align.center
 	@define "fontStyle",
-		get: -> return @_textLayer.fontStyle
-		set: (value) -> @_textLayer.fontStyle = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.fontStyle
+		set: (value) -> @_buttonLabel.fontStyle = value; @_buttonLabel.point = Align.center
 	@define "font",
-		get: -> return @_textLayer.font
-		set: (value) -> @_textLayer.font = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.font
+		set: (value) -> @_buttonLabel.font = value; @_buttonLabel.point = Align.center
 	@define "padding",
-		get: -> return @_textLayer.padding
-		set: (value) -> @_textLayer.padding = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.padding
+		set: (value) -> @_buttonLabel.padding = value; @_buttonLabel.point = Align.center
 	@define "lineHeight",
-		get: -> return @_textLayer.lineHeight
-		set: (value) -> @_textLayer.lineHeight = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.lineHeight
+		set: (value) -> @_buttonLabel.lineHeight = value; @_buttonLabel.point = Align.center
 	@define "letterSpacing",
-		get: -> return @_textLayer.letterSpacing
-		set: (value) -> @_textLayer.letterSpacing = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.letterSpacing
+		set: (value) -> @_buttonLabel.letterSpacing = value; @_buttonLabel.point = Align.center
 	@define "wordSpacing",
-		get: -> return @_textLayer.wordSpacing
-		set: (value) -> @_textLayer.wordSpacing = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.wordSpacing
+		set: (value) -> @_buttonLabel.wordSpacing = value; @_buttonLabel.point = Align.center
 	@define "textAlign",
-		get: -> return @_textLayer.textAlign
-		set: (value) -> @_textLayer.textAlign = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.textAlign
+		set: (value) -> @_buttonLabel.textAlign = value; @_buttonLabel.point = Align.center
 	@define "textOverflow",
-		get: -> return @_textLayer.textOverflow
-		set: (value) -> @_textLayer.textOverflow = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.textOverflow
+		set: (value) -> @_buttonLabel.textOverflow = value; @_buttonLabel.point = Align.center
 	@define "template",
-		get: -> return @_textLayer.template
-		set: (value) -> @_textLayer.template = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.template
+		set: (value) -> @_buttonLabel.template = value; @_buttonLabel.point = Align.center
 	@define "templateFormatter",
-		get: -> return @_textLayer.templateFormatter
-		set: (value) -> @_textLayer.templateFormatter = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.templateFormatter
+		set: (value) -> @_buttonLabel.templateFormatter = value; @_buttonLabel.point = Align.center
 	@define "textTransform",
-		get: -> return @_textLayer.textTransform
-		set: (value) -> @_textLayer.textTransform = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.textTransform
+		set: (value) -> @_buttonLabel.textTransform = value; @_buttonLabel.point = Align.center
 	@define "textDecoration",
-		get: -> return @_textLayer.textDecoration
-		set: (value) -> @_textLayer.textDecoration = value
+		get: -> @_buttonLabel.textDecoration
+		set: (value) -> @_buttonLabel.textDecoration = value
 	@define "textIndent",
-		get: -> return @_textLayer.textIndent
-		set: (value) -> @_textLayer.textIndent = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.textIndent
+		set: (value) -> @_buttonLabel.textIndent = value; @_buttonLabel.point = Align.center
 	@define "truncate",
-		get: -> return @_textLayer.truncate
-		set: (value) -> @_textLayer.truncate = value; @_textLayer?.point = Align.center
+		get: -> @_buttonLabel.truncate
+		set: (value) -> @_buttonLabel.truncate = value; @_buttonLabel.point = Align.center
 	@define "direction",
-		get: -> return @_textLayer.direction
-		set: (value) -> @_textLayer.direction = value	
+		get: -> @_buttonLabel.direction
+		set: (value) -> @_buttonLabel.direction = value	
 	@define "whiteSpace",
-		get: -> return @_textLayer.whiteSpace
-		set: (value) -> @_textLayer.whiteSpace = value; @_textLayer?.point = Align.center
-	@define "shadowX",
-		get: -> return @_textLayer.shadowX
-		set: (value) -> @_textLayer.shadowX = value
-	@define "shadowY",
-		get: -> return @_textLayer.shadowY
-		set: (value) -> @_textLayer.shadowY
-	@define "shadowBlur",
-		get: -> return @_textLayer.shadowBlur
-		set: (value) -> @_textLayer.shadowBlur = value
-	@define "shadowColor",
-		get: -> return @_textLayer.shadowColor
-		set: (value) -> @_textLayer.shadowColor = value
+		get: -> @_buttonLabel.whiteSpace
+		set: (value) -> @_buttonLabel.whiteSpace = value; @_buttonLabel.point = Align.center
+
+	# rename these TextLayer properties, as not to interfere with the RippleButton instance's own shadow properties
+	@define "textShadowX",
+		get: -> @_buttonLabel.shadowX
+		set: (value) -> @_buttonLabel.shadowX = value
+	@define "textShadowY",
+		get: -> @_buttonLabel.shadowY
+		set: (value) -> @_buttonLabel.shadowY = value
+	@define "textShadowBlur",
+		get: -> @_buttonLabel.shadowBlur
+		set: (value) -> @_buttonLabel.shadowBlur = value
+	@define "textShadowColor",
+		get: -> @_buttonLabel.shadowColor
+		set: (value) -> @_buttonLabel.shadowColor = value
