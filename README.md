@@ -21,14 +21,14 @@ If you are not using Modules, download `RippleButton.coffee`, place it in the `/
 
 `{RippleButton} = require "RippleButton"`
 ## Creating a RippleButton instance
-The following creates a 400x120 RippleButton instance:
+The following creates a 400x120 RippleButton instance and changes the default animation options of the ripple button.
 ```
 rippleButton = new RippleButton
-  rippleOptions: time: 0.3, curve: Bezier.easeOut
+  rippleOptions: time: 0.3, curve: Bezier.easeOut  # animation options for the ripple effect
   backgroundColor: "dodgerblue"
   width: 400
   height: 120
-  text: "Options" # label of button
+  text: "Options"  # label of button
 ```
 ## Properties
 * **rippleColor**: the color of the circle that animates to create the animation (default: `rippleButton.backgroundColor.darken 10`)
