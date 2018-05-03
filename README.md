@@ -52,7 +52,7 @@ If you want to set the shadow of the button's text label, use the following prop
 * **textShadowColor**: same as shadowColor for a TextLayer instance
 
 ## Defaults
-Here are the defaults specified for a new RippleButton instance. (Other defaults are inherited from Layer defaults.)
+Here are the defaults specified for a new RippleButton instance. (Other defaults are inherited from Layer defaults and TextLayer defaults.)
 ```
 backgroundColor: "cornflowerblue"
 rippleColor: (the background color darkened by 10%)
